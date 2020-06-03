@@ -9,6 +9,9 @@ public class CacheNode {
     String getCacheName() {
     	return cacheName;
     }
+    String getCacheIP(){
+    	return cacheIP;
+    }
     void setCacheName(String Name) {
     	cacheName=Name;
     }

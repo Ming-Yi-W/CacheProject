@@ -38,7 +38,6 @@ public class CacheManage {
         log.info("mx: {}", MAX_CIRCLE);
         for (int i = 0; i < size; i++) {
 
-
             for (int j = 0; j < virtualSize; j++) {
                 CacheNode cacheNode = new CacheNode();
                 cacheNode.setCacheName("" + i + "_" + j + i + j + "_node_" + i + "_" + j);
@@ -64,8 +63,8 @@ public class CacheManage {
 
         for (int i = 0; i < size; i++) {
             CacheNode cacheNode = new CacheNode();
-            cacheNode.setCacheName("node_" + i);
-            cacheNode.setCacheIP("192.168.1.10" + i);
+            cacheNode.setCacheName("node_" + 2*i);
+            cacheNode.setCacheIP("192.168.1.10" + 2*i);
             Long hashValue = hash(cacheNode.getCacheName());
             cacheNode.setHashValue(hashValue);
             int index = getNodeIndex(hashValue);
@@ -75,21 +74,46 @@ public class CacheManage {
                 cacheNodeList.add(index, cacheNode);
             }
 
-            printList();
+            //printList();
         }
 
         printList();
     }
+    public void addCacheNode(String Name,String Ip) {
 
+        CacheNode newCacheNode=new CacheNode();
+        newCacheNode.setCacheIP(Ip);
+        newCacheNode.setCacheName(Name);
+        Long newHashValue = hash(newCacheNode.getCacheName());
+        newCacheNode.setHashValue(newHashValue);
+        int index = getNodeIndex(newHashValue);
+        cacheNodeList.add(index, newCacheNode);
+        printList();
+    }
     /**
      * 存数据
+     * data:用户id
      */
-    public void putData(String data) {
+    public String putData(String data) {
         Long hashValue = hash(data);
         int index = getNodeIndex(hashValue);
         if(index == cacheNodeList.size()){
             index = 0;
         }
         log.info("data:{}[{}] put into ====>{}", data, hashValue, cacheNodeList.get(index));
+        return cacheNodeList.get(index).getCacheIP();
+    }
+    
+    /**
+     * 存数据
+     * hashvalue:用户Hash值
+     */
+    public String putHash(Long hashvalue) {
+        int index = getNodeIndex(hashvalue);
+        if(index == cacheNodeList.size()){
+            index = 0;
+        }
+        log.info("data:{} put into ====>{}", hashvalue, cacheNodeList.get(index));
+        return cacheNodeList.get(index).getCacheIP();
     }
 }
