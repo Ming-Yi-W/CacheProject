@@ -14,5 +14,5 @@
 `String putHash(Long hashvalue)`:返回服务器IP。  
 `void addCacheNode(String Name,String Ip)`:添加存储服务器。
 
-<img src="https://github.com/Ming-Yi-W/CacheProject/tree/master/Hash/log.png" style="width: 60%; clear: both;display: block;margin: auto;"/>
+![log](https://github.com/Ming-Yi-W/CacheProject/blob/master/Hash/log.png)
 &emsp;&emsp;如上图所示，首先初始化了5个服务器，然后根据用户的ID来选取接受服务的服务器；之后添加服务器`node_5(192.168.1.105)`,还是上述用户，所产生的结果发生变化。
